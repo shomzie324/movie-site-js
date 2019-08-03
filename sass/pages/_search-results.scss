@@ -1,0 +1,12 @@
+.search{
+    display: flex;
+    justify-content: space-around;
+}
+
+.results-container{
+    display: grid;
+    width: 80%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+}

@@ -1,0 +1,54 @@
+/* ------------------------- HEADING ANIMATIONS WITH CSS ONLY -------------------------*/
+/* only ever animate opacity and transform because browser is only optimized for these 2 things */
+/* x is left to right, y is top to bottom, negative translate moves left or up, positive moves right or down */
+
+/* ------------------------- FADE IN FROM LEFT WITH CSS ONLY -------------------------*/
+@keyframes moveInLeft{
+    /* start invisible and end up visible for fade in effect */
+    /* start more to the left */
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    /* move a bit to the right before returning to the original position */
+    80%{
+        transform: translateX(20px);
+    }
+    /* end up in original position */
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInRight{
+    /* start invisible and end up visible for fade in effect */
+    /* start more to the left */
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    /* move a bit to the right before returning to the original position */
+    80%{
+        transform: translateX(-20px);
+    }
+    /* end up in original position */
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInBottom{
+    /* start invisible and end up visible for fade in effect */
+    /* start lower than original/end position */
+    0%{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    /* end up in original position */
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,143 @@
+/* ------------------------------------- PSEUDO CLASSES ------------------------------------- */
+/* pseudo classes: special states of a selector e.g when a link is clicked, or an element is hovered */
+/* pseduo classes are used to apply style under certain conditions for an element */
+
+/* LINK: link is special state of selector when it is an achor element */
+/* VISITED: visited is special state of anchor when user clicks element and sees it again */
+/* transitions should be defined on the original state */
+.btn{
+    &:link,
+    &:visited {
+        font-size: $default-font-size;
+        text-transform: uppercase;
+        text-decoration: none;
+        /* 2 values: 1st is top+bottom, 2nd is left+right*/
+        padding: 15px 40px;
+        /* inline block: block means it gets its own space, inline means it is treated like text */
+        /* text align in parent will all btns to be centered */
+        display: inline-block;
+        border-radius: 100px;
+
+        /* css transitions: connects to properties to animate changes , all connects to all property changes */
+        transition: all .2s;
+
+        /* needed to make after pseduo element be absolutley positioned behind the actual btn */
+        position: relative;
+    }
+
+    &--white{
+        background-color: $colour-white;
+        color: $color-grey-dark;
+
+        &::after{
+            background-color: $colour-white;
+        }
+    }
+
+    &--green{
+        background-color: $color-primary;
+        color: $colour-white;
+
+        &::after{
+            background-color: $color-primary;
+        }
+    }
+
+    &--blue{
+        background-color: $color-tertiary-light;
+        color: $colour-white;
+
+        &::after{
+            background-color: $color-tertiary-light;
+        }
+    }
+
+    &--disable{
+        background-color: $color-grey-dark;
+        color: $colour-white;
+
+        &::after{
+            background-color: $color-grey-dark;
+        }
+    }
+
+    &--animated{
+        animation: moveInBottom .5s ease-out .75s;
+        /* animation fill mode backwards autmatically applies the 0% part of an keyframe animation before it starts */
+        animation-fill-mode: backwards;
+    }
+
+    &:hover{
+        /* negative moves btn up on hover */
+        transform: translateY(-3px);
+
+        /* box shadow: takes x val, y val, blur and colour */
+        box-shadow: 0 10px 20px rgba($color-black,0.2);
+
+        /* styles after pseduo element of the button when it is hovered */
+        &::after{
+            /* makes after element 2 times bigger than it was before */
+            transform: scaleX(1.4) scaleY(1.6);
+            /* gradually fades to 0 because .btn::after pseduo element has transition all property */
+            opacity: 0;
+        }
+    }
+
+    /* pseduo element for when anchor element is clicked */
+    /* transform is relative to original state not current state */
+    &:active{
+        /* going down when clicked creates push down effect */
+        transform:translateY(-1px);
+        /* decrese shadow on anchor click to give effect that button is going closer to page when pushed down */
+        box-shadow: 0 5px 10px rgba($color-black,0.2);
+    }
+
+    /* ------------------------------------- PSEUDO ELEMENTS ------------------------------------- */
+    /* Allows specific parts of an element to be styled by adding element right after the selected element to style that */
+
+    /* have element that looks like the original element expand out then go back behind the btn after for expansion effect */
+    /* must specify content and display property even if there is no content */
+    &::after{
+        content:"";
+        display: inline-block;
+        /* this is relative to the parent which for the this after pseudo element is the btn = same size as parent */
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+
+        /* puts pseudo element aligned with parent and behind it */
+        position: absolute;
+        top:0;
+        left:0;
+        z-index: -1;
+
+        /* transition all makes the scale out more smooth */
+        transition: all .4s;
+    }
+}
+
+.btn-text{
+    &:link,
+    &:visited{
+        font-size: $default-font-size;
+        color: $color-primary;
+        // inline block to use margin, padding etc. but still align as text
+        display: inline-block;
+        text-decoration: none;
+        border-bottom: 1px solid $color-primary;
+        padding: 3px;
+        transition: all .2s;
+    }
+    &:hover{
+        background-color: $color-primary;
+        color: $colour-white;
+        box-shadow: 0 1rem 2rem rgba($color-black,0.15);
+        transform: translateY(-2px);
+    }
+    &:active{
+        // reduce shadow blur a bit
+        box-shadow: 0 .5rem 1rem rgba($color-black,0.15);
+        //be less up than when button is hovered (pushed down kidn of)
+        transform: translateY(-1px);
+    }
+}

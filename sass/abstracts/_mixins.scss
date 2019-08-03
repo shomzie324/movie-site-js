@@ -1,0 +1,60 @@
+// mixins are resuable pieces of css code (can also take arguments) but don't return anything
+
+// clear fix hack appends pseudo element to collapsed elements to retain their height
+// used with @include clearfix in other files
+// only works with block elements
+@mixin clearfix {
+    &::after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// MEDIA QUERY MANAGER
+/* 
+0 - 600px: phone
+600 - 900px: tablet portrait 
+900 - 1200px: tablet landscape
+
+1200-1800: normal styles apply
+1800+px: big desktops
+*/
+// one way of manaing media quieries - 1 mixin per break point
+// @mixin respond-phone{
+//     @media(max-width: 600px){
+//         @content
+//     };
+// }
+
+/* 
+breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+*/
+
+// MEDIA Query Manager: 1 giant mixin with if directive for break point arguments
+// use relative unit incase user changes browser default
+//NOTE: ems and rems always reference browser default font size in media queries
+// 1em = 16px normally
+
+// ORDER OF QUERY SET UP: Base + typography > general layout + grid > page layout > components
+
+@mixin respond($breakpoint){
+    // if directive is the same as an if statement
+    @if $breakpoint == phone {
+         // content directive allows blocks of code into a mixin
+        @media(max-width: 37.5em){@content}; // 600px
+    }
+    @if $breakpoint == tab-port {
+        @media(max-width: 56.25em){@content}; // 900px
+    }
+    @if $breakpoint == tab-land {
+        @media(max-width: 75em){@content}; // 1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media(min-width: 112.5em){@content}; //1800px
+    }
+}

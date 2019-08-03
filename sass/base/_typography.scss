@@ -1,0 +1,99 @@
+/* properties related to font usually inherited so 
+good to have on the top level  */
+body{
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7; /* 1.7 tim */
+    color: $color-grey-dark;
+}
+
+/* h1 inside header text-box container */
+.heading-primary{
+    color:$colour-white;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+
+    /* spans are usually inline but making them block puts them on different lines */
+    /* good to keep h1 status but have multiple parts with span */
+    &--main{
+        display: block;
+        font-size: 6rem;
+        font-weight: 400;
+        letter-spacing: 3.5rem;
+        animation-name: moveInLeft;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        /* backface vis determines if the back of an element is visible when it is transformed */
+        backface-visibility: hidden;
+        /* 
+        optional animation properties:
+        animation-delay: 3s;
+        animation-iteration-count: 3; 
+        */
+
+        @include respond(phone){
+            letter-spacing: 1rem;
+            font-size: 5rem;
+        }
+    }
+
+    &--sub{
+        display: block;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 17px;
+        animation: moveInRight 1s ease-out;
+
+        @include respond(phone){
+            letter-spacing: .5rem;
+            font-size: 5rem;
+        }
+    }
+}
+
+.heading-secondary{
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all .2s;
+    letter-spacing: 2px;
+
+    // limit gradient to text content with inline-blk, 
+    // then background clip to put background only where there is text
+    // then make text transparent because background is behind it
+    display: inline-block;
+    background-image: linear-gradient(to right, $color-tertiary-light, $color-tertiary-dark);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    @include respond(tab-port){
+        font-size: 3rem;
+    }
+    @include respond(phone){
+        font-size: 2.5rem;
+    }
+
+    &:hover{
+        transform: scale(1.1);
+        
+        // text shadow same as box params: x shadow, y shadow, blur, colour
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+    }
+}
+
+.heading-tertiary{
+    font-size: $default-font-size;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.paragraph{
+    font-size: $default-font-size;
+    
+    // give all paragraph classes except last one should have margin bottom
+    &:not(:last-child){
+        margin-bottom: 3rem;
+    }
+}

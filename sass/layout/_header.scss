@@ -1,0 +1,77 @@
+/* header with overlay: list of background images where gradient has 0.8 opacity*/
+.header {
+    height: 95vh;
+    // hero img
+    /* background img can have list of images, img 2 under img 1 etc. so linear gradient is on top */
+    background-image: linear-gradient(to right bottom, rgba($color-tertiary-light, 0.8), rgba($color-tertiary-dark, 0.8)), url("../img/cinema-food.jpg");
+    background-size: cover;
+    background-position: top;
+    /* specify point coordinates x y of image that should be visible (clock wise) */
+    /* each point's x and y is relative to the top left as origin */
+    /* x is left to right, y is top to bottom */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    position: relative;
+
+    @include respond(phone){
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);  
+    }
+
+    /* absolute allows top, left, right, botoom to be used. reference is parent (.header) with postion as relative */
+    &__logo-box{
+        position: absolute;
+        top: 40px;
+        left: 40px;
+    }
+
+    &__logo{
+        height: 35px;
+    }
+
+    &__icon{
+        font-size: 8rem;
+        color: $colour-white;
+    }
+
+    &__search-box{
+        display: block;
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($colour-white,1);
+        border: none;
+        // input elements do not automatically inherit font families, so set it
+        font-family: inherit;
+        color: inherit;
+
+        border-bottom: 3px solid transparent;
+        transition: all .3s;
+
+        //pseudo class for when an input element is in focus
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black,.1);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid{
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+    }
+
+    /* ------------------------ CENTERING PROPERLY EVERY TIME ------------------------ */
+    /* absolute positioning best way to center inner box of header */
+    &__text-box{
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        /* translating in transform not relative to element and not its parent. puts translates center of element to center of page */
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+}
